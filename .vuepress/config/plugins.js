@@ -144,7 +144,7 @@ module.exports = [
         'plugins/vuepress-plugin-img-lazy',
         {
             useNative: false, // 是否使用img原生懒加载
-            loadImage: 'images/img-loading.gif',
+            // loadImage: 'images/img-loading.gif',
             errorImage: 'images/img-error.jpg'
         }
     ],
