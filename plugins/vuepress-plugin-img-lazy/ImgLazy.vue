@@ -1,15 +1,5 @@
 <template>
-  <img
-    v-bind="$attrs"
-    v-if="config.loadImage"
-    :src="config.loadImage"
-    :data-src="dataSrc"
-    :loading="config.useNative ? 'lazy' : null"
-    :class="[config.selector, { show: showAnimate }]"
-    @load="handleImageLoad"
-    @error="handleError" />
-  <!-- 当 config.loadImage 无值时显示 CSS 加载效果 -->
-  <div v-else class="image-loading">
+  <div class="image-wrapper">
     <div v-if="!showAnimate" class="skeleton-loader"></div>
     <img
       v-bind="$attrs"
@@ -74,12 +64,10 @@ export default {
   animation: blur-in 1s ease-out; // 修改动画为 ease-out 让结束更平滑
 }
 
-.image-loading {
+.image-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
-  // 使用 data-aspect-ratio 属性计算 padding-bottom
-  padding-bottom: calc(attr(data-aspect-ratio number) * 100%);
   background-color: #f0f0f0;
   overflow: hidden;
 

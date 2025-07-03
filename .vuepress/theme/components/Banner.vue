@@ -17,12 +17,10 @@ const { proxy } = getCurrentInstance();
 
 const bannerList = ref([
   {
-    name: '暂未开放',
-    tip: '暂未开放呦~',
-    // name: '音乐',
-    // tip: '来听歌吧。DJ, drop the beat！',
-    url: '',
-    cover: 'https://ghcdn.pages.dev/other/202404132202688.png',
+    name: '音乐',
+    tip: '来听歌吧。DJ, drop the beat！',
+    url: 'https://cloudmusic.pages.dev/',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181636996.jpg',
   },
   {
     name: 'MMD',
@@ -30,7 +28,7 @@ const bannerList = ref([
     url: 'https://mmdviewer.pages.dev/',
     // url: 'https://pakho12138.github.io/MMDWebViewer/',
     // cover: 'https://ghcdn.pages.dev/other/202404132303752.png',
-    cover: 'https://ghcdn.pages.dev/other/202406022348221.png',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181643063.jpg',
   },
   {
     name: '暂未开放',
@@ -38,7 +36,7 @@ const bannerList = ref([
     // name: '图库',
     // tip: 'AIGC, yyds！！！',
     url: '',
-    cover: 'https://ghcdn.pages.dev/other/202404132207985.png',
+    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181631186.jpg',
   },
 ]);
 defaultImg: 'images/img-error.jpg'; // 默认图片

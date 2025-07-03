@@ -1,6 +1,6 @@
 <template>
 <div class="personal-info-wrapper">
-  <img
+  <!-- <img
     class="personal-img"
     v-if="$themeConfig.authorAvatar"
     :src="$withBase($themeConfig.authorAvatar)"
@@ -22,7 +22,7 @@
       <h3>{{$tags.list.length}}</h3>
       <h6>{{$recoLocales.tag}}</h6>
     </div>
-  </div>
+  </div> -->
   <ul class="social-links">
     <li
       class="social-item"
