@@ -6,7 +6,7 @@ tags:
   - PicList
 categories:
   - 技术
-image: https://ghcdn.pages.dev/other/202404132158489.png
+image: https://ghcdn.pages.dev/pic/202404132158489.webp
 ---
 
 # GitHub + PicGo 搭建个人图床

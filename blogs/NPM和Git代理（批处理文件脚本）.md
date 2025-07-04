@@ -5,7 +5,7 @@ tags:
   - npm
 categories:
   - 脚本
-image: https://ghcdn.pages.dev/other/202404131533069.png
+image: https://ghcdn.pages.dev/pic/202404131533069.webp
 ---
 
 # NPM 和 Git 代理（批处理文件脚本）

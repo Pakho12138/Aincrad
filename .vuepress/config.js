@@ -105,7 +105,7 @@ module.exports = {
     searchMaxSuggestions: 10,
     lastUpdated: "Last Updated",
     author: "Pakho",
-    authorAvatar: "/avatar.png",
+    authorAvatar: "/avatar.webp",
     noFoundPageByTencent: false, //关闭404
     record: "v2.0.0",
     startYear: "2023",
@@ -116,17 +116,10 @@ module.exports = {
       placeholder: '在这片空白之境，让你的思绪如流星划过，留下绚烂的痕迹...'
     },
     heroImages: [
-      // 'https://pakhoc.gitee.io/assets/images/bannerBg.png',
-      'https://ghcdn.pages.dev/image/202401251812451.jpg',
-      'https://ghcdn.pages.dev/other/202406302329976.jpg',
-      'https://ghcdn.pages.dev/image/202401251850712.jpg',
-      'https://ghcdn.pages.dev/image/202401251850711.jpg',
-      // 'https://ghcdn.pages.dev/image/202401251850713.png',
-      // 'https://ghcdn.pages.dev/image/202401251850710.jpg',
-      // 'https://ghcdn.pages.dev/image/202401251850709.jpg',
-      // 'https://ghcdn.pages.dev/image/202401251850708.jpg',
-      // 'https://ghcdn.pages.dev/image/202401251850706.jpg',
-      // 'https://ghcdn.pages.dev/image/202401251909981.jpg',
+      'https://ghcdn.pages.dev/image/20250704110330189.webp',
+      'https://ghcdn.pages.dev/image/20250704110330193.webp',
+      'https://ghcdn.pages.dev/image/20250704110330191.webp',
+      'https://ghcdn.pages.dev/image/20250704110330192.webp',
     ],
     // config目录
     nav,

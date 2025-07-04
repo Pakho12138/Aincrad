@@ -4,7 +4,7 @@ tags:
   - NVM
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202408081432073.jpg
+image: https://ghcdn.pages.dev/pic/202408081432073.webp
 ---
 
 # NVM中可安装node版本列表为空

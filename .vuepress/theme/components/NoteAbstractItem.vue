@@ -25,7 +25,7 @@ export default defineComponent({
   props: ['item', 'currentPage', 'currentTag'],
   data() {
     return {
-      defaultImg: 'images/img-error.jpg', // 默认图片
+      defaultImg: 'images/img-error.webp', // 默认图片
       observer: null,
       options: {
         root: null,

@@ -4,7 +4,7 @@ tags:
   - ionic
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202404132207985.png
+image: https://ghcdn.pages.dev/pic/202404132207985.webp
 ---
 
 # ionic 解决 picker 选择器组件动态刷新选项重叠、消失的问题

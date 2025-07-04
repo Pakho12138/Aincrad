@@ -5,7 +5,7 @@ tags:
   - 字体
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202406022350939.jpg
+image: https://ghcdn.pages.dev/pic/202406022350939.webp
 ---
 
 # 使用字蛛（FontSpider）压缩字体

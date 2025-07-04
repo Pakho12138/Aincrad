@@ -1,6 +1,11 @@
 <template>
   <div class="banner">
-    <div class="banner-item select-cursor" v-for="(item, index) in bannerList" :key="index" @click="jumpUrl(item.url)" @mouseenter="$kbnShowTip(item.tip)">
+    <div
+      class="banner-item select-cursor"
+      v-for="(item, index) in bannerList"
+      :key="index"
+      @click="jumpUrl(item.url)"
+      @mouseenter="$kbnShowTip(item.tip)">
       <img-lazy class="thumbnail" :src="item.cover || defaultImg" />
       <div class="info">
         <h3>{{ item.name }}</h3>
@@ -20,15 +25,13 @@ const bannerList = ref([
     name: '音乐',
     tip: '来听歌吧。DJ, drop the beat！',
     url: 'https://cloudmusic.pages.dev/',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181636996.jpg',
+    cover: 'https://ghcdn.pages.dev/pic/202404132202688.webp',
   },
   {
     name: 'MMD',
     tip: '基于threeJS实现的MMD播放器',
     url: 'https://mmdviewer.pages.dev/',
-    // url: 'https://pakho12138.github.io/MMDWebViewer/',
-    // cover: 'https://ghcdn.pages.dev/other/202404132303752.png',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181643063.jpg',
+    cover: 'https://ghcdn.pages.dev/pic/202406022348221.webp',
   },
   {
     name: '暂未开放',
@@ -36,10 +39,10 @@ const bannerList = ref([
     // name: '图库',
     // tip: 'AIGC, yyds！！！',
     url: '',
-    cover: 'https://cdn.jsdelivr.net/gh/Pakho12138/PicGoCDN/other/20250703181631186.jpg',
+    cover: 'https://ghcdn.pages.dev/pic/202404132207985.webp',
   },
 ]);
-defaultImg: 'images/img-error.jpg'; // 默认图片
+const defaultImg = 'images/img-error.webp'; // 默认图片
 
 function jumpUrl(url) {
   // window.location.href = url;

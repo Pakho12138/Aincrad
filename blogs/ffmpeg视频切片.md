@@ -4,7 +4,7 @@ tags:
   - ffmpeg
 categories:
   - 技术
-image: https://ghcdn.pages.dev/other/202405181531999.jpg
+image: https://ghcdn.pages.dev/pic/202405181531999.webp
 ---
 
 # ffmpeg 教程：视频切片

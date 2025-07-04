@@ -5,7 +5,7 @@ const MUSIC_LIST = [
     name: music.name,
     artist: music.artist,
     url: `${BASE_URL}/music/${music.name}.mp3`,
-    cover: `${BASE_URL}/music_pic/${music.name}.png`,
+    cover: `${BASE_URL}/music_pic/${music.name}.webp`,
 }))
 
 module.exports = [
@@ -145,7 +145,7 @@ module.exports = [
         {
             useNative: false, // 是否使用img原生懒加载
             // loadImage: 'images/img-loading.gif',
-            errorImage: 'images/img-error.jpg'
+            errorImage: 'images/img-error.webp'
         }
     ],
     // 获取摘要和图片（自定义插件）
