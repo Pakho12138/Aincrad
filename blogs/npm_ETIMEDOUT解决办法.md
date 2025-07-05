@@ -4,7 +4,7 @@ tags:
   - npm
 categories:
   - 脚本
-image: https://ghcdn.pages.dev/other/202404132211993.png
+image: https://ghcdn.pages.dev/pic/20250705160421826.webp
 ---
 
 # npm install 报错 ERR code ETIMEDOUT 的解决办法

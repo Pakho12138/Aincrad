@@ -1,8 +1,8 @@
 ---
-image: https://ghcdn.pages.dev/other/202404132314013.png
+image: https://ghcdn.pages.dev/pic/20250705160421814.webp
 ---
 
-# @vuepress-reco/vuepress-plugin-kan-ban-niang
+# 看板娘插件 @vuepress-reco/vuepress-plugin-kan-ban-niang
 
 ![demo.png](./images/demo.png)
 

@@ -5,7 +5,7 @@ tags:
   - 部署
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202404132235831.png
+image: https://ghcdn.pages.dev/pic/20250705160421822.webp
 ---
 
 # Vue3 部署问题

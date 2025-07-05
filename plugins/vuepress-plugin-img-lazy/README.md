@@ -1,8 +1,8 @@
 ---
-image: https://ghcdn.pages.dev/other/202404132318931.png
+image: https://ghcdn.pages.dev/pic/20250705163452255.webp
 ---
 
-# vuepress-plugin-img-lazy
+# 图片懒加载插件 vuepress-plugin-img-lazy
 
 > a vuepress plugin to better supporting image lazy loading
 

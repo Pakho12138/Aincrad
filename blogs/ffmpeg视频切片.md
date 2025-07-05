@@ -55,7 +55,7 @@ MPEG2-TS（Transport Stream“传输流”；又称TS、TP、MPEG-TS 或 M2T）
 MPEG2-TS格式的特点就是要求从视频流的任一片段开始都是可以独立解码的。
 ```
 
-![img](https://ghcdn.pages.dev/other/202405181511544.image)
+![img](https://ghcdn.pages.dev/other/202405181511544.webp)
 
 ### 2.3 执行结果
 

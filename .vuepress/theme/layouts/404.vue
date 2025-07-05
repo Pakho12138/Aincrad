@@ -4,7 +4,7 @@
       <h1>404</h1>
       <blockquote>{{ getMsg() }}</blockquote>
       <router-link to="/">Take me home.</router-link>
-      <img-lazy src="https://ghcdn.pages.dev/other/202404141051488.png" />
+      <img-lazy src="https://ghcdn.pages.dev/pic/20250705163803459.webp" />
     </article>
   </section>
 </template>
@@ -67,9 +67,10 @@ export default defineComponent({
       border-radius: 4px
 a
   display block
-img
+.image-wrapper
   display: block;
-  width: 50%;
+  width: 400px;
+  height: 600px;
   margin: 40px auto;
 
 @media screen and (max-width: 720px)

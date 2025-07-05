@@ -4,7 +4,7 @@ tags:
  - Vue
 categories:
  - 前端
-image: https://ghcdn.pages.dev/other/202404132303752.png
+image: https://ghcdn.pages.dev/pic/20250705160421816.webp
 ---
 
 # 组合式 API 

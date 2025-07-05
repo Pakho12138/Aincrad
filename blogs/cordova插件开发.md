@@ -4,7 +4,7 @@ tags:
   - Cordova
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202404132221238.png
+image: https://ghcdn.pages.dev/pic/20250705160421825.webp
 ---
 
 # Cordova 插件开发

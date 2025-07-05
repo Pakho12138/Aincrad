@@ -4,7 +4,7 @@ tags:
   - Github Actions
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202404132224566.png
+image: https://ghcdn.pages.dev/pic/20250705160421824.webp
 ---
 
 # 使用 Github Action 实现 Github 自动同步代码到 Gitee，并自动部署 Gitee Pages

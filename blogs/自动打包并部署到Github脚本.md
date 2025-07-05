@@ -4,7 +4,7 @@ tags:
   - Git
 categories:
   - 前端
-image: https://ghcdn.pages.dev/other/202404132231658.png
+image: https://ghcdn.pages.dev/pic/20250705160421823.webp
 ---
 
 # 自动打包并部署到 Github 脚本
