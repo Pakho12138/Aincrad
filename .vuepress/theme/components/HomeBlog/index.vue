@@ -38,7 +38,7 @@
 
       <div class="focus-info" :class="{ hide: isPlay }">
         <ModuleTransition delay="0.04">
-          <h1 class="hover" v-if="recoShowModule && $frontmatter.heroText !== null" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
+          <h1 class="hover" v-if="$frontmatter.heroText !== null" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
           </h1>
         </ModuleTransition>
@@ -46,7 +46,7 @@
         <div class="header-info">
           <ModuleTransition delay="0.08">
             <div>
-              <span id="description" v-if="recoShowModule && $frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
+              <span id="description" v-if="$frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
                 <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
               </span>
             </div>
