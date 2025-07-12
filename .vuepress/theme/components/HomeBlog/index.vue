@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { defineComponent, toRefs, ref, reactive, computed, onBeforeMount, onMounted } from 'vue';
+import { defineComponent, toRefs, ref, reactive, computed, onBeforeMount, onMounted, nextTick } from 'vue';
 import TagList from '@theme/components/TagList';
 import FriendLink from '@theme/components/FriendLink';
 import NoteAbstract from '@theme/components/NoteAbstract';
@@ -261,13 +261,15 @@ export default defineComponent({
       state.heroHeight = document.querySelector('.hero').clientHeight;
       state.recoShow = true;
 
-      new Typed('#description', {
-        strings: instance.$frontmatter.tagline || instance.$description,
-        typeSpeed: 35,
-        backDelay: 1500,
-        backSpeed: 25,
-        cursorChar: ' __',
-        loop: false,
+      nextTick().then(() => {
+        new Typed('#description', {
+          strings: instance.$frontmatter.tagline || instance.$description,
+          typeSpeed: 35,
+          backDelay: 1500,
+          backSpeed: 25,
+          cursorChar: ' __',
+          loop: false,
+        });
       });
     });
 

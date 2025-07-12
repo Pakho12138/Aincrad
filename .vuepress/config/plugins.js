@@ -67,22 +67,22 @@ module.exports = [
         }
     ],
     // 音乐播放器
-    [
-        "@vuepress-reco/vuepress-plugin-bgm-player", {
-            audios: MUSIC_LIST,
-            autoShrink: true,
-            // autoplay: true,
-        }
-    ],
+    // [
+    //     "@vuepress-reco/vuepress-plugin-bgm-player", {
+    //         audios: MUSIC_LIST,
+    //         autoShrink: true,
+    //         // autoplay: true,
+    //     }
+    // ],
     // 鼠标点击特效
-    [
-        "vuepress-plugin-cursor-effects",
-        {
-            size: 2,                    // size of the particle, default: 2
-            shape: 'circle',  // shape of the particle, default: 'star'
-            zIndex: 999999999           // z-index property of the canvas, default: 999999999
-        }
-    ],
+    // [
+    //     "vuepress-plugin-cursor-effects",
+    //     {
+    //         size: 2,                    // size of the particle, default: 2
+    //         shape: 'circle',  // shape of the particle, default: 'star'
+    //         zIndex: 999999999           // z-index property of the canvas, default: 999999999
+    //     }
+    // ],
     // 彩带背景
     ["ribbon-animation", {
         size: 90,   // 默认数据
