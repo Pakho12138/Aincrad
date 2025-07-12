@@ -278,7 +278,7 @@ input:focus {
 
   .home-link {
     .logo {
-      transform: rotate(360deg) scale(1.2);
+      transform: rotate(360deg) scale(1.2) translateZ(0);
       margin-left: 40px;
       margin-right: 20px;
     }
@@ -717,6 +717,10 @@ input:focus {
 // 隐藏回到顶部小火箭
 .back-to-ceiling {
   display: none !important;
+}
+
+.vuepress-canvas-cursor {
+  transform: translateZ(0);
 }
 
 @keyframes fade-in-bt {

@@ -535,6 +535,7 @@ export default defineComponent({
       border-radius: 10px;
       box-sizing: initial;
       white-space: nowrap;
+      transform: translateZ(0);
       &:before {
         content: "";
         position: absolute;
