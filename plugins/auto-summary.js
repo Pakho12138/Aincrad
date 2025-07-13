@@ -17,14 +17,14 @@ module.exports = (options, context) => ({
         const $ = cheerio.load(html);
 
         // 获取第一张图片
-        const firstImage = $('img').first();
+        // const firstImage = $('img').first();
 
-        // 如果找到了图片，提取其 src 属性作为图片的 URL
-        let imageUrl = '';
-        if (firstImage.length > 0) {
-            imageUrl = firstImage.attr('src');
-            $page.firstImage = imageUrl;
-        }
+        // // 如果找到了图片，提取其 src 属性作为图片的 URL
+        // let imageUrl = '';
+        // if (firstImage.length > 0) {
+        //     imageUrl = firstImage.attr('src');
+        //     $page.firstImage = imageUrl;
+        // }
 
         // 移除所有标题标签
         $('h1, h2, h3, h4, h5, h6').remove();

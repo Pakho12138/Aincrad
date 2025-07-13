@@ -99,7 +99,7 @@ module.exports = [
         }
     ],
     // 获取摘要和图片（自定义插件）
-    // 'plugins/auto-summary',
+    'plugins/auto-summary',
     // 彩带背景
     // ["ribbon-animation", {
     //     size: 90,   // 默认数据
