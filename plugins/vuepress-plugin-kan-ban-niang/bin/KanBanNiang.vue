@@ -165,7 +165,7 @@ export default {
   props: {
     options: {
       type: Object,
-      default: () => ({}),
+      default: () => null,
     },
   },
   beforeMount() {
@@ -183,7 +183,10 @@ export default {
       // model的样式
       this.modelStyle = Object.assign(this.modelStyle, opts.modelStyle || {});
       // messageBox的样式
-      this.messageStyle = Object.assign(this.messageStyle, opts.messageStyle || {});
+      this.messageStyle = Object.assign(
+        this.messageStyle,
+        opts.messageStyle || {}
+      );
       // 按钮的样式
       this.btnStyle = Object.assign(this.btnStyle, opts.btnStyle || {});
     } else {
@@ -199,16 +202,14 @@ export default {
       };
       this.myTheme = THEME;
       this.currentTheme = THEME[0];
-      this.style = {
-        width: WIDTH,
-        height: HEIGHT,
-      };
+      this.style.width = WIDTH;
+      this.style.height = HEIGHT;
       // model的样式
-      this.modelStyle = MODEL_STYLE;
+      this.modelStyle = Object.assign(this.modelStyle, MODEL_STYLE || {});
       // messageBox的样式
-      this.messageStyle = MESSAGE_STYLE;
+      this.messageStyle = Object.assign(this.messageStyle, MESSAGE_STYLE || {});
       // 按钮的样式
-      this.btnStyle = BTN_STYLE;
+      this.btnStyle = Object.assign(this.btnStyle, BTN_STYLE || {});
     }
   },
   mounted() {
