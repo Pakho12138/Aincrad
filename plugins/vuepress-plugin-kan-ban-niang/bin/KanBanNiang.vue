@@ -73,19 +73,32 @@ export default {
       isLoaded: true,
       displayBanNiang: false,
       isShowMessageBox: true,
-      isShowBtns: CLEAN,
+      isShowBtns: false,
       messages: {
-        message: MESSAGES.welcome,
-        welcome: MESSAGES.welcome,
-        home: MESSAGES.home,
-        theme: MESSAGES.theme,
-        close: MESSAGES.close,
-        hoverTips: MESSAGES.hoverTips,
-        clickTips: MESSAGES.clickTips,
-        realTimeTip: MESSAGES.realTimeTip,
+        message: "",
+        welcome: "",
+        home: "心里的花，我想要带你回家。",
+        theme: "好吧，希望你能喜欢我的其他小伙伴。",
+        close: "你知道我喜欢吃什么吗？痴痴地望着你。",
+        hoverTips: ["心里的花，我想要带你回家。"],
+        clickTips: ["嗷呜~"],
       },
-      currentTheme: THEME[0],
-      myTheme: THEME,
+      currentTheme: "",
+      myTheme: [
+        "blackCat",
+        "whiteCat",
+        "haru1",
+        "haru2",
+        "haruto",
+        "koharu",
+        "izumi",
+        "shizuku",
+        "wanko",
+        "miku",
+        "z16",
+        "shield",
+        "xiaomai",
+      ],
       themeName: [
         "blackCat",
         "whiteCat",
@@ -119,28 +132,84 @@ export default {
           "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-izumi/assets/izumi.model.json",
         shizuku:
           "https://ghcdn.pages.dev/live2d/shizuku/assets/shizuku.model.json",
-        wanko:
-          "https://ghcdn.pages.dev/live2d/wanko/assets/wanko.model.json",
+        wanko: "https://ghcdn.pages.dev/live2d/wanko/assets/wanko.model.json",
         miku: "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-miku/assets/miku.model.json",
         z16: "https://cdn.jsdelivr.net/gh/QiShaoXuan/live2DModel@1.0.0/live2d-widget-model-z16/assets/z16.model.json",
-        shield:
-          "https://ghcdn.pages.dev/live2d/shield/model1.json",
-        xiaomai:
-          "https://ghcdn.pages.dev/live2d/xiaomai/xiaomai.model.json",
+        shield: "https://ghcdn.pages.dev/live2d/shield/model1.json",
+        xiaomai: "https://ghcdn.pages.dev/live2d/xiaomai/xiaomai.model.json",
       },
       // model的高宽
       style: {
-        width: WIDTH,
-        height: HEIGHT,
+        width: 150,
+        height: 220,
       },
       // model的样式
-      modelStyle: MODEL_STYLE,
+      modelStyle: {
+        right: "90px",
+        bottom: "-20px",
+        opacity: "1",
+      },
       // messageBox的样式
-      messageStyle: MESSAGE_STYLE,
+      messageStyle: {
+        right: "68px",
+        bottom: "190px",
+      },
       // 按钮的样式
-      btnStyle: BTN_STYLE,
+      btnStyle: {
+        right: "90px",
+        bottom: "40px",
+      },
       timer: null,
     };
+  },
+  props: {
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  beforeMount() {
+    const opts = this.$props.options;
+
+    if (opts) {
+      this.isShowBtns = opts.clean || false;
+      this.messages = Object.assign(this.messages, opts.messages || {});
+      if (opts.theme?.length) {
+        this.myTheme = opts.theme;
+        this.currentTheme = opts.theme[0];
+      }
+      opts.width && (this.style.width = opts.width);
+      opts.height && (this.style.height = opts.height);
+      // model的样式
+      this.modelStyle = Object.assign(this.modelStyle, opts.modelStyle || {});
+      // messageBox的样式
+      this.messageStyle = Object.assign(this.messageStyle, opts.messageStyle || {});
+      // 按钮的样式
+      this.btnStyle = Object.assign(this.btnStyle, opts.btnStyle || {});
+    } else {
+      this.isShowBtns = CLEAN;
+      this.messages = {
+        message: MESSAGES.welcome,
+        welcome: MESSAGES.welcome,
+        home: MESSAGES.home,
+        theme: MESSAGES.theme,
+        close: MESSAGES.close,
+        hoverTips: MESSAGES.hoverTips,
+        clickTips: MESSAGES.clickTips,
+      };
+      this.myTheme = THEME;
+      this.currentTheme = THEME[0];
+      this.style = {
+        width: WIDTH,
+        height: HEIGHT,
+      };
+      // model的样式
+      this.modelStyle = MODEL_STYLE;
+      // messageBox的样式
+      this.messageStyle = MESSAGE_STYLE;
+      // 按钮的样式
+      this.btnStyle = BTN_STYLE;
+    }
   },
   mounted() {
     this.btnStyle = {
@@ -287,6 +356,7 @@ export default {
     right 50px
     bottom 100px
     color #00adb5
+    z-index 9999
     .messageBox
       position: fixed;
       bottom: 290px;
@@ -340,7 +410,7 @@ export default {
           color lighten($accentColor, 50%)
     #banniang
       z-index 99999
-      // pointer-events none
+      pointer-events auto
       position fixed
 
 

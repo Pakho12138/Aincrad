@@ -7,7 +7,10 @@
       <!-- swiper背景 -->
       <Background ref="bgRef" :initialSlide="bgIndex"></Background>
 
-      <span class="anchor-down" @click="scrollFn" @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
+      <span
+        class="anchor-down"
+        @click="scrollFn"
+        @mouseenter="$kbnShowTip('点击这里，探索未知的世界~')"></span>
 
       <div class="video-wrapper">
         <VideoPlayer
@@ -23,22 +26,45 @@
           @pause="handleVideoPause"
           @error="handleVideoError">
         </VideoPlayer>
-        <div class="video-btn" :class="{ 'video-play': !isPlay, 'video-pause': isPlay }" @click="toggleVideoStatus" @mouseenter="$kbnShowTip('想看视频吗？可以先从左下角关闭音乐呢~')"></div>
-        <div v-if="showBgVideo" class="video-btn video-close" @click="closeBgVideo"></div>
-        <div class="video-stu" :class="{ show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay) }">
-          <span v-if="!isVideoInit">{{ isError ? '视频加载出错' : '视频加载中...' }}</span>
+        <div
+          class="video-btn"
+          :class="{ 'video-play': !isPlay, 'video-pause': isPlay }"
+          @click="toggleVideoStatus"
+          @mouseenter="
+            $kbnShowTip('想看视频吗？可以先从左下角关闭音乐呢~')
+          "></div>
+        <div
+          v-if="showBgVideo"
+          class="video-btn video-close"
+          @click="closeBgVideo"></div>
+        <div
+          class="video-stu"
+          :class="{
+            show: showBgVideo && (!isVideoInit || !isCanPlay || !isPlay),
+          }">
+          <span v-if="!isVideoInit">{{
+            isError ? '视频加载出错' : '视频加载中...'
+          }}</span>
           <span v-if="isVideoInit && isCanPlay && !isPlay">已暂停...</span>
           <span v-if="isVideoInit && !isCanPlay">缓冲中...</span>
         </div>
       </div>
 
       <ModuleTransition>
-        <img class="hero-img" v-if="recoShowModule && $frontmatter.heroImage" :style="heroImageStyle || {}" :src="$withBase($frontmatter.heroImage)" alt="hero" />
+        <img
+          class="hero-img"
+          v-if="recoShowModule && $frontmatter.heroImage"
+          :style="heroImageStyle || {}"
+          :src="$withBase($frontmatter.heroImage)"
+          alt="hero" />
       </ModuleTransition>
 
       <div class="focus-info" :class="{ hide: isPlay }">
         <ModuleTransition delay="0.04">
-          <h1 class="hover" v-if="$frontmatter.heroText !== null" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
+          <h1
+            class="hover"
+            v-if="$frontmatter.heroText !== null"
+            @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
             {{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}
           </h1>
         </ModuleTransition>
@@ -46,24 +72,46 @@
         <div class="header-info">
           <ModuleTransition delay="0.08">
             <div>
-              <span id="description" v-if="$frontmatter.tagline !== null" class="description hover" @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
+              <span
+                id="description"
+                v-if="$frontmatter.tagline !== null"
+                class="description hover"
+                @mouseenter="$kbnShowTip($frontmatter.heroText || $title)">
                 <!-- {{ $frontmatter.tagline || $description || 'Welcome to your vuePress-theme-reco site' }} -->
               </span>
             </div>
           </ModuleTransition>
           <div class="link-btns">
-            <img src="svg/next-b.svg" class="ic-arrow pre" @click="changeBg($event, true)" @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
+            <img
+              src="svg/next-b.svg"
+              class="ic-arrow pre"
+              @click="changeBg($event, true)"
+              @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
             <PersonalInfo />
-            <img src="svg/next-b.svg" class="ic-arrow" @click="changeBg" @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
+            <img
+              src="svg/next-b.svg"
+              class="ic-arrow"
+              @click="changeBg"
+              @mouseenter="$kbnShowTip('点击这里可以切换背景哟~')" />
           </div>
         </div>
       </div>
 
-      <component v-if="bubbles && !isPlay" :is="bubbles" :options="options"></component>
+      <component
+        v-if="bubbles && !isPlay"
+        :is="bubbles"
+        :options="options"></component>
+      <component
+        v-if="kanBanNiang"
+        :is="kanBanNiang"
+        :options="kanBanNiangOptions"></component>
     </div>
 
     <!-- 精灵球 -->
-    <div class="pokeball" :class="{ shake: showShakeAnimate }" @mouseenter="$kbnShowTip('点下中间的按钮看看~')">
+    <div
+      class="pokeball"
+      :class="{ shake: showShakeAnimate }"
+      @mouseenter="$kbnShowTip('点下中间的按钮看看~')">
       <div class="ball-top"></div>
       <div class="ball-center">
         <div class="ball-line"></div>
@@ -74,7 +122,10 @@
       <div class="ball-bottom"></div>
     </div>
     <!-- 精灵球的交互菜单 -->
-    <div v-show="showBanner" class="animate-wrapper" :class="{ minisize: hideBannerAnimate, maxsize: showBannerAnimate }">
+    <div
+      v-show="showBanner"
+      class="animate-wrapper"
+      :class="{ minisize: hideBannerAnimate, maxsize: showBannerAnimate }">
       <Banner v-show="recoShowModule" />
     </div>
 
@@ -82,7 +133,9 @@
       <div v-show="recoShowModule" class="home-blog-wrapper">
         <div class="blog-list">
           <!-- 博客列表 -->
-          <note-abstract :data="$recoPosts" @paginationChange="paginationChange" />
+          <note-abstract
+            :data="$recoPosts"
+            @paginationChange="paginationChange" />
         </div>
         <!-- <div ref="infoRef" class="info-wrapper">
           <PersonalInfo />
@@ -111,7 +164,16 @@
 </template>
 
 <script>
-import { defineComponent, toRefs, ref, reactive, computed, onBeforeMount, onMounted, nextTick } from 'vue';
+import {
+  defineComponent,
+  toRefs,
+  ref,
+  reactive,
+  computed,
+  onBeforeMount,
+  onMounted,
+  nextTick,
+} from 'vue';
 import TagList from '@theme/components/TagList';
 import FriendLink from '@theme/components/FriendLink';
 import NoteAbstract from '@theme/components/NoteAbstract';
@@ -125,7 +187,17 @@ import Banner from '@theme/components/Banner.vue';
 import Background from '../Background.vue';
 
 export default defineComponent({
-  components: { NoteAbstract, TagList, FriendLink, ModuleTransition, PersonalInfo, RecoIcon, VideoPlayer, Banner, Background },
+  components: {
+    NoteAbstract,
+    TagList,
+    FriendLink,
+    ModuleTransition,
+    PersonalInfo,
+    RecoIcon,
+    VideoPlayer,
+    Banner,
+    Background,
+  },
   data() {
     return {
       recoShow: false,
@@ -149,6 +221,28 @@ export default defineComponent({
       hideBannerAnimate: false,
       showShakeAnimate: false,
       timer: null,
+      kanBanNiang: null,
+      kanBanNiangOptions: {
+        theme: ['wanko', 'shizuku', 'shield', 'xiaomai'],
+        clean: true,
+        messages: {
+          welcome: '欢迎来到我的博客',
+          home: '心里的花，我想要带你回家。',
+          theme: '好吧，希望你能喜欢我的其他小伙伴。',
+          close: '你不喜欢我了吗？痴痴地望着你。',
+          hoverTips: [
+            '心里的花，我想要带你回家',
+            '我的愿望是 ~ 世界和平！！！',
+            '汪，汪汪~',
+            ' (*･´ω`･)っ',
+          ],
+          clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
+        },
+        modelStyle: { left: '20px', bottom: '-50px' },
+        messageStyle: { left: '20px', bottom: '250px' },
+        width: 250,
+        height: 320,
+      },
     };
   },
   setup(props, ctx) {
@@ -161,7 +255,9 @@ export default defineComponent({
 
     const recoShowModule = useShowModule();
 
-    const heroImageStyle = computed(() => instance.$frontmatter.heroImageStyle || {});
+    const heroImageStyle = computed(
+      () => instance.$frontmatter.heroImageStyle || {}
+    );
 
     // 原先的背景封面图片
     // const bgImageStyle = computed(() => {
@@ -190,7 +286,9 @@ export default defineComponent({
       // 获取用户自定义的样式，优先更高
       const { bgImageStyle } = instance.$frontmatter;
 
-      return bgImageStyle ? { ...initBgImageStyle, ...bgImageStyle } : initBgImageStyle;
+      return bgImageStyle
+        ? { ...initBgImageStyle, ...bgImageStyle }
+        : initBgImageStyle;
     });
 
     const preClicked = ref(false);
@@ -208,10 +306,12 @@ export default defineComponent({
       // bgImage.value = url ? instance.$withBase(url) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
       // isBgLoaded();
       if (isPre) {
-        bgIndex.value = --bgIndex.value % instance.$themeConfig.heroImages.length;
+        bgIndex.value =
+          --bgIndex.value % instance.$themeConfig.heroImages.length;
         instance.$refs.bgRef.swiper.slidePrev();
       } else {
-        bgIndex.value = ++bgIndex.value % instance.$themeConfig.heroImages.length;
+        bgIndex.value =
+          ++bgIndex.value % instance.$themeConfig.heroImages.length;
         instance.$refs.bgRef.swiper.slideNext();
       }
       localStorage.setItem('bgIndex', instance.$refs.bgRef.swiper.realIndex);
@@ -229,31 +329,13 @@ export default defineComponent({
       };
     };
 
-    // 根据当前时间弹出不同问候语
-    const greetingByTime = () => {
-      let tip = '';
-      const curHour = new Date().getHours();
-      if (curHour >= 0 && curHour < 7) {
-        tip = '夜深了，好好做个美梦吧，晚安！';
-      } else if (curHour >= 7 && curHour < 12) {
-        tip = '一日之计在于晨，加油！';
-      } else if (curHour >= 12 && curHour < 17) {
-        tip = '午后很容易犯困呢，幸福地睡个午觉吧！';
-      } else if (curHour >= 17 && curHour < 20) {
-        tip = '傍晚了，和家人好好吃顿饭吧！';
-      } else if (curHour >= 20 && curHour < 24) {
-        tip = '晚上好，今天过得怎么样？';
-      }
-      instance.$kbnShowTip(tip);
-    };
-
     onBeforeMount(() => {
-      greetingByTime();
-
       // bgIndex.value = Math.floor(Math.random() * instance.$themeConfig.heroImages.length); // 现有列表条数内产生随机数
       bgIndex.value = +(localStorage.getItem('bgIndex') || 0);
       const randomBg = instance.$themeConfig.heroImages[bgIndex.value];
-      bgImage.value = randomBg ? instance.$withBase(randomBg) : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
+      bgImage.value = randomBg
+        ? instance.$withBase(randomBg)
+        : instance.$frontmatter.bgImage; //如果用户没有设置背景图，设置主题默认封面图
       isBgLoaded();
     });
 
@@ -273,7 +355,18 @@ export default defineComponent({
       });
     });
 
-    return { recoShowModule, heroImageStyle, bgImageStyle, ...toRefs(state), getOneColor, changeBg, bgLoaded, preClicked, nextClicked, bgIndex };
+    return {
+      recoShowModule,
+      heroImageStyle,
+      bgImageStyle,
+      ...toRefs(state),
+      getOneColor,
+      changeBg,
+      bgLoaded,
+      preClicked,
+      nextClicked,
+      bgIndex,
+    };
   },
   mounted() {
     console.log(
@@ -281,10 +374,20 @@ export default defineComponent({
       'color:#6366f1; background:#0b1021; font-size:1.5rem; padding:0.15rem 0.25rem; margin: 1rem auto; font-family: Rockwell; border: 2px solid #6366f1; border-radius: 4px;font-weight: bold; text-shadow: 1px 1px 1px #00af87bf;'
     );
 
+    this.recoShow = true;
+
     import('vue-canvas-effect/src/components/bubbles').then(module => {
       this.bubbles = module.default;
     });
-    this.recoShow = true;
+
+    import('/plugins/vuepress-plugin-kan-ban-niang/bin/KanBanNiang').then(
+      module => {
+        this.kanBanNiang = module.default;
+        this.$nextTick(() => {
+          this.greetingByTime();
+        });
+      }
+    );
 
     // 视口监听
     // this.observer = new IntersectionObserver(this.handleIntersection, this.options);
@@ -310,6 +413,23 @@ export default defineComponent({
   },
 
   methods: {
+    // 根据当前时间弹出不同问候语
+    greetingByTime() {
+      let tip = '';
+      const curHour = new Date().getHours();
+      if (curHour >= 0 && curHour < 7) {
+        tip = '夜深了，好好做个美梦吧，晚安！';
+      } else if (curHour >= 7 && curHour < 12) {
+        tip = '一日之计在于晨，加油！';
+      } else if (curHour >= 12 && curHour < 17) {
+        tip = '午后很容易犯困呢，幸福地睡个午觉吧！';
+      } else if (curHour >= 17 && curHour < 20) {
+        tip = '傍晚了，和家人好好吃顿饭吧！';
+      } else if (curHour >= 20 && curHour < 24) {
+        tip = '晚上好，今天过得怎么样？';
+      }
+      this.$kbnShowTip(tip);
+    },
     paginationChange(page) {
       // setTimeout(() => {
       //   window.scrollTo(0, this.heroHeight);
@@ -319,7 +439,8 @@ export default defineComponent({
       this.$router.push({ path: tagInfo.path });
     },
     scrollFn() {
-      const windowH = document.getElementsByClassName('hero')[0].clientHeight - 58; // 获取窗口高度
+      const windowH =
+        document.getElementsByClassName('hero')[0].clientHeight - 58; // 获取窗口高度
       document.documentElement.scrollTop = windowH; // 滚动条滚动到指定位置
     },
     videoCanPlay() {
@@ -420,7 +541,6 @@ export default defineComponent({
     display flex
     align-items center
     justify-content center
-    text-align center
     overflow hidden
 
     .hero-bg {
@@ -508,7 +628,10 @@ export default defineComponent({
     }
 
     .focus-info {
-      z-index 1
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
       transition: .4s ease all;
       &.hide{
         transform: translateY(-999px);

@@ -43,29 +43,29 @@ module.exports = [
     //   ]
     // }],
     // 看板娘
-    [
-        'plugins/vuepress-plugin-kan-ban-niang', {
-            // theme: [
-            //     'xiaomai', 'shield', 'wanko', 'miku', 'whiteCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'shizuku', 'blackCat', 'z16'
-            // ],
-            theme: [
-                'wanko', 'shizuku', 'shield', 'xiaomai'
-            ],
-            clean: true,
-            messages: {
-                welcome: '欢迎来到我的博客',
-                home: '心里的花，我想要带你回家。',
-                theme: '好吧，希望你能喜欢我的其他小伙伴。',
-                close: '你不喜欢我了吗？痴痴地望着你。',
-                hoverTips: ['心里的花，我想要带你回家', '我的愿望是 ~ 世界和平！！！', '汪，汪汪~', ' (*･´ω`･)っ'],
-                clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
-            },
-            modelStyle: { left: '20px', bottom: '-50px' },
-            messageStyle: { left: '20px', bottom: '250px' },
-            width: 250,
-            height: 320
-        }
-    ],
+    // [
+    //     'plugins/vuepress-plugin-kan-ban-niang', {
+    //         // theme: [
+    //         //     'xiaomai', 'shield', 'wanko', 'miku', 'whiteCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'shizuku', 'blackCat', 'z16'
+    //         // ],
+    //         theme: [
+    //             'wanko', 'shizuku', 'shield', 'xiaomai'
+    //         ],
+    //         clean: true,
+    //         messages: {
+    //             welcome: '欢迎来到我的博客',
+    //             home: '心里的花，我想要带你回家。',
+    //             theme: '好吧，希望你能喜欢我的其他小伙伴。',
+    //             close: '你不喜欢我了吗？痴痴地望着你。',
+    //             hoverTips: ['心里的花，我想要带你回家', '我的愿望是 ~ 世界和平！！！', '汪，汪汪~', ' (*･´ω`･)っ'],
+    //             clickTips: ['嗷呜~', 'o(*￣▽￣*)o'],
+    //         },
+    //         modelStyle: { left: '20px', bottom: '-50px' },
+    //         messageStyle: { left: '20px', bottom: '250px' },
+    //         width: 250,
+    //         height: 320
+    //     }
+    // ],
     // 音乐播放器
     // [
     //     "@vuepress-reco/vuepress-plugin-bgm-player", {
