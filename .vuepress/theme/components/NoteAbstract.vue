@@ -1,8 +1,24 @@
 <template>
   <div class="abstract-wrapper">
-    <NoteAbstractItem v-for="item in currentPageData" :key="item.path" :item="item" :currentPage="currentPage" :currentTag="currentTag" />
-    <pagation v-show="false" class="pagation" :total="data.length" :currentPage="currentPage" @getCurrentPage="getCurrentPage" />
-    <div v-if="showNextBtn" class="btn-next" @click="currentPage++" @mouseenter="$kbnShowTip(`去看看更多文章~`)">加载更多</div>
+    <NoteAbstractItem
+      v-for="item in currentPageData"
+      :key="item.path"
+      :item="item"
+      :currentPage="currentPage"
+      :currentTag="currentTag" />
+    <pagation
+      v-show="false"
+      class="pagation"
+      :total="data.length"
+      :currentPage="currentPage"
+      @getCurrentPage="getCurrentPage" />
+    <div
+      v-if="showNextBtn"
+      class="btn-next"
+      @click="currentPage++"
+      @mouseenter="$kbnShowTip(`去看看更多文章~`)">
+      加载更多
+    </div>
   </div>
 </template>
 
@@ -35,7 +51,6 @@ export default defineComponent({
       currentPage.value = page;
       instance._setStoragePage(page);
 
-
       ctx.emit('paginationChange', page);
     };
 
@@ -48,7 +63,7 @@ export default defineComponent({
   },
   computed: {
     // 是否显示加载更多按钮
-    showNextBtn () {
+    showNextBtn() {
       return this.currentPage < Math.ceil(this.$props.data.length / 10);
     },
   },
