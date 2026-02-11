@@ -8,7 +8,6 @@ module.exports = (options, context) => ({
     setTimeout(() => {
       try {
         const content = $page._strippedContent || $page.content;
-        console.log('原始内容:', content);
         if (!content) {
           return;
         }
@@ -39,7 +38,6 @@ module.exports = (options, context) => ({
         // 例如: 取前 100 个字符作为摘要
         const summary = textContent.slice(0, 100);
   
-        console.log('处理后的文本内容:', summary);
         if (summary) {
           $page.excerpt = summary;
         }
