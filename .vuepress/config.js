@@ -114,6 +114,8 @@ module.exports = {
       appId: 'vmCTZevnoxQKw5s8SY3zaWTW-gzGzoHsz', // your appId
       appKey: 'VZ4UKu0rBRhwqf1BaQqW6UXd', // your appKey
       placeholder: '在这片空白之境，让你的思绪如流星划过，留下绚烂的痕迹...',
+      visitor: false, // 禁用访问统计
+      recordIP: false, // 禁用 IP 记录
     },
     heroImages: [
       // 'https://ghcdn.pages.dev/image/20250704110330189.webp',
