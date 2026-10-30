@@ -83,8 +83,6 @@ module.exports = [
     //         zIndex: 999999999           // z-index property of the canvas, default: 999999999
     //     }
     // ],
-    // loading页面
-    '@vuepress-reco/vuepress-plugin-loading-page',
     // 阅读进度条
     'reading-progress',
     // 小猫goTop
@@ -130,8 +128,8 @@ module.exports = [
     //     ribbonShow: false, //  点击彩带  true显示  false为不显示
     //     ribbonAnimationShow: true  // 滑动彩带
     // }],
-    // 樱花特效
-    "sakura",
+    // 樱花特效（本地 fork：仅桌面 + 尊重 reduced-motion）
+    'plugins/vuepress-plugin-sakura',
     // 代码复制
     [
         "vuepress-plugin-copy-copyright",

@@ -2,9 +2,17 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(url, index) in $themeConfig.heroImages" :key="index">
-        <!-- <img :src="url" v-if="index==0||index==($themeConfig.heroImages.length-1)" /> -->
-        <img :data-src="url" class="swiper-lazy" />
-        <div class="swiper-lazy-preloader swiper-lazy-preloader"></div>
+        <img
+          v-if="index === 0"
+          :src="url"
+          fetchpriority="high"
+          decoding="async" />
+        <img
+          v-else
+          :data-src="url"
+          class="swiper-lazy"
+          loading="lazy"
+          decoding="async" />
       </div>
     </div>
   </div>
@@ -14,7 +22,6 @@
 import { onMounted, ref } from 'vue';
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css';
-import { EventBus } from '../helpers/eventBus';
 
 const props = defineProps({
   // 播放视频的路径'
@@ -42,15 +49,6 @@ onMounted(() => {
       loadOnTransitionStart: true, // 当slide在transition开始时加载图片
     },
     updateOnImagesReady: true,
-    on: {
-      lazyImageReady: function (slideEl, imageEl) {
-        //图片完成加载时隐藏loading
-        const classList = slideEl.classList;
-        if (classList.contains('swiper-slide-active')) {
-          EventBus.$emit('hideLoading');
-        }
-      },
-    },
   });
 });
 

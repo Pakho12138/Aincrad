@@ -2,17 +2,13 @@
   <div class="theme-container" :class="pageClasses">
     <div v-if="!absoluteEncryption">
       <transition name="fade">
-        <LoadingPage v-show="firstLoad" class="loading-wrapper" />
-      </transition>
-
-      <transition name="fade">
         <Password
-          v-show="!firstLoad && !isHasKey"
+          v-show="!isHasKey"
           class="password-wrapper-out"
           key="out" />
       </transition>
 
-      <div :class="{ hide: firstLoad || !isHasKey }">
+      <div :class="{ hide: !isHasKey }">
         <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
         <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -36,7 +32,6 @@
     </div>
     <div v-else>
       <transition name="fade">
-        <LoadingPage v-if="firstLoad" />
         <Password v-if="!isHasKey" />
       </transition>
       <div v-if="isHasKey">
@@ -63,11 +58,7 @@ import Sidebar from '@theme/components/Sidebar';
 import PersonalInfo from '@theme/components/PersonalInfo';
 import Password from '@theme/components/Password';
 import SubSidebar from '@theme/components/SubSidebar';
-import { setTimeout } from 'timers';
 import { useInstance } from '@theme/helpers/composable';
-import { EventBus } from '../helpers/eventBus';
-
-// import LoadingPage from '@theme/components/LoadingPage'
 
 export default defineComponent({
   components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar },
@@ -93,7 +84,6 @@ export default defineComponent({
     const isSidebarOpen = ref(false);
     const isHasKey = ref(true);
     const isHasPageKey = ref(true);
-    const firstLoad = ref(true);
 
     const shouldShowSidebar = computed(() => props.sidebarItems.length > 0);
     const absoluteEncryption = computed(() => {
@@ -164,29 +154,11 @@ export default defineComponent({
     const toggleSidebar = to => {
       isSidebarOpen.value = typeof to === 'boolean' ? to : !isSidebarOpen.value;
     };
-    const handleLoading = () => {
-      setTimeout(() => {
-        firstLoad.value = false;
-        if (sessionStorage.getItem('firstLoad') == undefined)
-          sessionStorage.setItem('firstLoad', false);
-      });
-    };
-
-    const hideLoading = () => {
-      firstLoad.value = false;
-      if (sessionStorage.getItem('firstLoad') == undefined)
-        sessionStorage.setItem('firstLoad', false);
-    };
 
     onMounted(() => {
       initRouterHandler();
       hasKey();
       hasPageKey();
-
-      !instance.$frontmatter.home &&
-        sessionStorage.getItem('firstLoad') &&
-        handleLoading();
-      EventBus.$on('hideLoading', hideLoading);
     });
 
     return {
@@ -200,7 +172,6 @@ export default defineComponent({
       isHasKey,
       isHasPageKey,
       toggleSidebar,
-      firstLoad,
     };
   },
 
@@ -224,14 +195,6 @@ export default defineComponent({
     &::-webkit-scrollbar
       width: 0
       height: 0
-  .loading-wrapper
-    position fixed
-    z-index 22
-    top 0
-    bottom 0
-    left 0
-    right 0
-    margin auto
   .password-wrapper-out
     position absolute
     z-index 21

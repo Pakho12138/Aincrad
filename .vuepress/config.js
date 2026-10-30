@@ -10,29 +10,7 @@ module.exports = {
   dest: 'dist',
   permalink: '/:slug', // 开启永久路径
   head: [
-    // [
-    //   'script',
-    //   {
-    //     src: "/js/index.min.js" // 自动处理cdn路径
-    //   }
-    // ],
-    [
-      'link',
-      {
-        rel: 'icon',
-        href: '/favicon.ico',
-      },
-    ],
-    // [
-    //   'link',
-    //   {
-    //     rel: "stylesheet",
-    //     href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-    //     integrity: "sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==",
-    //     crossorigin: "anonymous",
-    //     referrerpolicy: "no-referrer"
-    //   }
-    // ],
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
     [
       'meta',
       {
@@ -41,11 +19,29 @@ module.exports = {
       },
     ],
     // 解决防盗链导致403问题
+    ['meta', { name: 'referrer', content: 'no-referrer' }],
+    // 关键第三方源提前握手
+    ['link', { rel: 'dns-prefetch', href: 'https://ghcdn.pages.dev' }],
+    ['link', { rel: 'preconnect', href: 'https://ghcdn.pages.dev', crossorigin: '' }],
+    // 首屏 hero 首图 preload（Swiper 首帧展示图）
     [
-      'meta',
+      'link',
       {
-        name: 'referrer',
-        content: 'no-referrer',
+        rel: 'preload',
+        as: 'image',
+        href: '/images/bg1.webp',
+        fetchpriority: 'high',
+      },
+    ],
+    // 首屏字体 preload（放在字体 CDN 上，等 preconnect 完成即可发起）
+    [
+      'link',
+      {
+        rel: 'preload',
+        as: 'font',
+        href: 'https://ghcdn.pages.dev/fonts/PingFang SC Semibold.min.ttf',
+        type: 'font/ttf',
+        crossorigin: 'anonymous',
       },
     ],
   ],
