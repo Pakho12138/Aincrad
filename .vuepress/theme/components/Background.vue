@@ -1,12 +1,18 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(url, index) in $themeConfig.heroImages" :key="index">
+      <div
+        class="swiper-slide"
+        v-for="(url, index) in $themeConfig.heroImages"
+        :key="index">
         <img
-          v-if="index === 0"
+          v-if="index === criticalIndex"
+          ref="criticalHeroImg"
           :src="url"
           fetchpriority="high"
-          decoding="async" />
+          decoding="async"
+          @load="onCriticalImageReady"
+          @error="onCriticalImageReady" />
         <img
           v-else
           :data-src="url"
@@ -19,36 +25,77 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, getCurrentInstance, nextTick, onMounted, ref } from 'vue';
 import Swiper from 'swiper';
 import 'swiper/css/swiper.min.css';
+import { markFirstScreenReady } from '../helpers/eventBus';
 
 const props = defineProps({
-  // 播放视频的路径'
   initialSlide: {
     type: Number,
     default: () => 0,
   },
 });
 
+const { proxy } = getCurrentInstance();
 const swiper = ref();
+const criticalHeroImg = ref(null);
+let imageReady = false;
+let swiperReady = false;
+let notified = false;
+
+const criticalIndex = computed(() => {
+  const list = (proxy && proxy.$themeConfig && proxy.$themeConfig.heroImages) || [];
+  const len = list.length || 1;
+  return ((props.initialSlide % len) + len) % len;
+});
+
+const tryNotifyReady = () => {
+  if (notified || !imageReady || !swiperReady) return;
+  notified = true;
+  // 等浏览器把首帧画出来再通知关闭 Loading，避免淡出时底下还是空的
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      markFirstScreenReady();
+    });
+  });
+};
+
+const onCriticalImageReady = () => {
+  imageReady = true;
+  tryNotifyReady();
+};
+
 onMounted(() => {
   swiper.value = new Swiper('.swiper-container', {
-    // autoplay: {
-    //   delay: 5000,
-    //   disableOnInteraction: false,
-    // },
-    initialSlide: props.initialSlide, // 初始下标
+    initialSlide: props.initialSlide,
     loop: true,
     speed: 500,
     effect: 'fade',
     lazy: {
-      // 懒加载
-      loadPrevNext: true, // 允许将延迟加载应用到最接近的slide的图片（前一个和后一个slide）
-      loadPrevNextAmount: 2, // 设置在延迟加载图片时提前多少个slide
-      loadOnTransitionStart: true, // 当slide在transition开始时加载图片
+      loadPrevNext: true,
+      loadPrevNextAmount: 2,
+      loadOnTransitionStart: true,
     },
     updateOnImagesReady: true,
+    on: {
+      init() {
+        swiperReady = true;
+        nextTick(() => {
+          const img = Array.isArray(criticalHeroImg.value)
+            ? criticalHeroImg.value[0]
+            : criticalHeroImg.value;
+          if (img && img.complete) {
+            imageReady = true;
+          }
+          tryNotifyReady();
+        });
+      },
+      imagesReady() {
+        imageReady = true;
+        tryNotifyReady();
+      },
+    },
   });
 });
 
@@ -59,7 +106,7 @@ defineExpose({
 
 <style lang="stylus" scoped>
 .swiper-container {
-  --swiper-theme-color: $accentColor; // swiper 主题色
+  --swiper-theme-color: $accentColor;
   position: absolute;
   width: 100%;
   height: 100%;

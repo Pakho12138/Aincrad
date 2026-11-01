@@ -6,6 +6,7 @@
 
 <script>
 const MOBILE_BREAKPOINT = 720;
+const FIRST_SCREEN_READY = 'aincrad:first-screen-ready';
 
 function prefersReducedMotion() {
   if (typeof window === 'undefined' || !window.matchMedia) return false;
@@ -84,13 +85,23 @@ export default {
     if (!this.show) return;
     if (!isDesktopViewport()) return;
     if (prefersReducedMotion()) return;
-    this.active = true;
-    this.$nextTick(() => this.start());
+    // 等首屏 Loading 结束后再启动，避免在 Loading 出现前闪出樱花
+    if (!document.documentElement.classList.contains('page-loading')) {
+      this.activate();
+    } else {
+      window.addEventListener(FIRST_SCREEN_READY, this.activate, { once: true });
+    }
   },
   beforeDestroy() {
+    window.removeEventListener(FIRST_SCREEN_READY, this.activate);
     this.stop();
   },
   methods: {
+    activate() {
+      if (this.active) return;
+      this.active = true;
+      this.$nextTick(() => this.start());
+    },
     start() {
       const canvas = this.$refs.canvas;
       if (!canvas) return;

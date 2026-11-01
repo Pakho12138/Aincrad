@@ -1,14 +1,25 @@
 <template>
   <div class="theme-container" :class="pageClasses">
     <div v-if="!absoluteEncryption">
+      <!-- 固定遮罩；首页始终在下层渲染。leaving 后淡出，结束后再卸载 -->
+      <LoadingPage
+        v-if="loaderMounted"
+        :leaving="loaderLeaving"
+        @after-leave="onLoadingGone" />
+
       <transition name="fade">
         <Password
-          v-show="!isHasKey"
+          v-show="!firstLoad && !isHasKey"
           class="password-wrapper-out"
           key="out" />
       </transition>
 
-      <div :class="{ hide: !isHasKey }">
+      <div
+        class="page-shell"
+        :class="{
+          'is-covered': firstLoad,
+          hide: !isHasKey,
+        }">
         <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
         <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -31,10 +42,17 @@
       </div>
     </div>
     <div v-else>
+      <LoadingPage
+        v-if="loaderMounted"
+        :leaving="loaderLeaving"
+        @after-leave="onLoadingGone" />
       <transition name="fade">
-        <Password v-if="!isHasKey" />
+        <Password v-if="!firstLoad && !isHasKey" />
       </transition>
-      <div v-if="isHasKey">
+      <div
+        v-if="isHasKey"
+        class="page-shell"
+        :class="{ 'is-covered': firstLoad }">
         <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
         <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
@@ -52,16 +70,27 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref, onMounted } from 'vue';
+import { defineComponent, computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import Navbar from '@theme/components/Navbar';
 import Sidebar from '@theme/components/Sidebar';
 import PersonalInfo from '@theme/components/PersonalInfo';
 import Password from '@theme/components/Password';
 import SubSidebar from '@theme/components/SubSidebar';
+import LoadingPage from '@theme/components/LoadingPage';
 import { useInstance } from '@theme/helpers/composable';
+import {
+  EventBus,
+  beginLoadingExit,
+  clearPageLoadingClass,
+  markFirstScreenReady,
+  markLoadingStart,
+  pageLoadState,
+} from '../helpers/eventBus';
+
+const LOADING_FALLBACK_MS = 8000;
 
 export default defineComponent({
-  components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar },
+  components: { Sidebar, Navbar, Password, PersonalInfo, SubSidebar, LoadingPage },
 
   props: {
     sidebar: {
@@ -84,6 +113,10 @@ export default defineComponent({
     const isSidebarOpen = ref(false);
     const isHasKey = ref(true);
     const isHasPageKey = ref(true);
+    const firstLoad = ref(true);
+    const loaderMounted = ref(true);
+    const loaderLeaving = ref(false);
+    let fallbackTimer = null;
 
     const shouldShowSidebar = computed(() => props.sidebarItems.length > 0);
     const absoluteEncryption = computed(() => {
@@ -155,10 +188,50 @@ export default defineComponent({
       isSidebarOpen.value = typeof to === 'boolean' ? to : !isSidebarOpen.value;
     };
 
+    const hideLoading = () => {
+      if (!firstLoad.value || loaderLeaving.value) return;
+      beginLoadingExit();
+      firstLoad.value = false;
+      loaderLeaving.value = true;
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+      if (sessionStorage.getItem('firstLoad') == undefined) {
+        sessionStorage.setItem('firstLoad', false);
+      }
+      if (!pageLoadState.ready) {
+        markFirstScreenReady();
+      }
+    };
+
+    const onLoadingGone = () => {
+      loaderMounted.value = false;
+      clearPageLoadingClass();
+    };
+
+    markLoadingStart();
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.add('page-loading');
+    }
+
     onMounted(() => {
       initRouterHandler();
       hasKey();
       hasPageKey();
+
+      EventBus.$on('hideLoading', hideLoading);
+
+      if (!instance.$frontmatter.home) {
+        markFirstScreenReady();
+      } else {
+        fallbackTimer = setTimeout(markFirstScreenReady, LOADING_FALLBACK_MS);
+      }
+    });
+
+    onBeforeUnmount(() => {
+      EventBus.$off('hideLoading', hideLoading);
+      if (fallbackTimer) clearTimeout(fallbackTimer);
     });
 
     return {
@@ -172,6 +245,10 @@ export default defineComponent({
       isHasKey,
       isHasPageKey,
       toggleSidebar,
+      firstLoad,
+      loaderMounted,
+      loaderLeaving,
+      onLoadingGone,
     };
   },
 
@@ -210,17 +287,26 @@ export default defineComponent({
     bottom 0
     left 0
     right 0
+  .page-shell
+    position relative
+    z-index 1
+    min-height 100vh
+    &.is-covered
+      pointer-events none
   .hide
     height 100vh
     overflow hidden
     opacity 0
+    pointer-events none
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease-in-out .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
+.fade-leave-active
+  transition opacity 0.4s ease
+.fade-leave-to
+  opacity 0
+.fade-enter-active
+  transition none
+.fade-enter, .fade-enter-to
+  opacity 1
 
 @media (max-width: $MQMobile)
   .theme-container

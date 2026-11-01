@@ -10,6 +10,17 @@ module.exports = {
   dest: 'dist',
   permalink: '/:slug', // 开启永久路径
   head: [
+    // 尽早标记 loading，并记录开始时间（供最小展示时长计算）
+    [
+      'script',
+      {},
+      "document.documentElement.classList.add('page-loading');window.__AINCRAD_LOADING_START__=Date.now();",
+    ],
+    [
+      'style',
+      {},
+      'html.page-loading,html.page-loading body{background:#141b2d!important;overflow:hidden!important}html.page-loading .global-ui .Sakura{visibility:hidden!important;opacity:0!important;pointer-events:none!important}',
+    ],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     [
       'meta',
@@ -40,6 +51,17 @@ module.exports = {
         rel: 'preload',
         as: 'font',
         href: 'https://ghcdn.pages.dev/fonts/PingFang SC Semibold.min.ttf',
+        type: 'font/ttf',
+        crossorigin: 'anonymous',
+      },
+    ],
+    // Loading 页标题字体（GLOBAL_FONT1），避免 swap 时字形跳变
+    [
+      'link',
+      {
+        rel: 'preload',
+        as: 'font',
+        href: 'https://ghcdn.pages.dev/fonts/YunFengJingLongHangShu.min.ttf',
         type: 'font/ttf',
         crossorigin: 'anonymous',
       },
